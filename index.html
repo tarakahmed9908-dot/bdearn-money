@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BdEarn Money - Payment Gateway</title>
+<meta name="description" content="BdEarn Money - Simple and secure payment collection platform for merchants.">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--navy:#101d38;--blue:#2457d6;--light:#f5f8ff;--muted:#65718a}
+body{font-family:Arial,sans-serif;color:var(--navy);background:#fff;line-height:1.6}
+a{text-decoration:none;color:inherit}
+.container{width:90%;max-width:1150px;margin:auto}
+header{height:76px;display:flex;align-items:center;border-bottom:1px solid #edf0f5;background:#fff}
+.nav{display:flex;align-items:center;justify-content:space-between}
+.logo{font-size:23px;font-weight:800;letter-spacing:-1px}
+.logo span{color:var(--blue)}
+.links{display:flex;gap:28px;align-items:center;font-size:14px;font-weight:600}
+.links a:hover{color:var(--blue)}
+.btn{display:inline-block;padding:12px 21px;border-radius:9px;background:var(--blue);color:white;font-weight:700;border:0;cursor:pointer}
+.btn-outline{background:white;color:var(--blue);border:1px solid #d8e2ff}
+.hero{background:linear-gradient(120deg,#f3f7ff,#fff 65%);padding:85px 0 90px}
+.hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:45px;align-items:center}
+.tag{display:inline-block;background:#e8efff;color:var(--blue);padding:7px 13px;border-radius:30px;font-size:12px;font-weight:700;margin-bottom:20px}
+h1{font-size:53px;line-height:1.12;letter-spacing:-2px;margin-bottom:20px}
+h1 span{color:var(--blue)}
+.hero p{color:var(--muted);font-size:17px;max-width:510px;margin-bottom:27px}
+.hero-buttons{display:flex;gap:12px;flex-wrap:wrap}
+.visual{background:var(--navy);padding:30px;border-radius:22px;color:white;box-shadow:0 22px 55px #152d5525}
+.visual-top{display:flex;justify-content:space-between;color:#b9c8e5;font-size:13px}
+.amount{font-size:36px;font-weight:800;margin:18px 0 6px}
+.visual small{color:#a9badb}
+.status{display:inline-block;background:#174d46;color:#73e1b8;padding:5px 10px;border-radius:20px;font-size:11px}
+.visual-line{height:1px;background:#354461;margin:24px 0}
+.method{display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid #34415b;font-size:14px}
+.method:last-child{border:0}
+.method b{color:#fff}
+section{padding:75px 0}
+.section-title{text-align:center;margin-bottom:38px}
+.section-title h2{font-size:32px;margin-bottom:8px}
+.section-title p{color:var(--muted)}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.card{border:1px solid #e8edf5;padding:27px;border-radius:15px;background:white}
+.card-icon{width:48px;height:48px;background:#edf2ff;color:var(--blue);border-radius:12px;display:grid;place-items:center;font-size:23px;margin-bottom:17px}
+.card h3{font-size:18px;margin-bottom:8px}
+.card p{font-size:14px;color:var(--muted)}
+.methods{background:var(--light)}
+.payment-list{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.payment{background:white;padding:24px;border-radius:14px;text-align:center;border:1px solid #e8edf5}
+.payment h3{font-size:20px;margin-bottom:5px}
+.payment p{font-size:13px;color:var(--muted)}
+.bk{color:#d92c82}.ng{color:#e47d19}.rk{color:#7136c7}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.step{text-align:center;padding:22px}
+.number{width:44px;height:44px;border-radius:50%;background:#eaf0ff;color:var(--blue);font-weight:800;display:grid;place-items:center;margin:0 auto 15px}
+.cta{background:var(--navy);color:white;text-align:center;padding:58px 25px;border-radius:20px}
+.cta p{color:#c2cde0;margin:12px auto 23px;max-width:550px}
+footer{background:#0b152a;color:white;padding:45px 0 22px;margin-top:75px}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:35px}
+footer p,footer a{font-size:13px;color:#aebbd1}
+footer h4{margin-bottom:13px}
+footer a{display:block;margin:8px 0}
+.copy{border-top:1px solid #26334b;margin-top:30px;padding-top:18px;text-align:center;font-size:12px;color:#8f9db5}
+@media(max-width:760px){
+ .links{gap:12px;font-size:12px}
+ .links .hide{display:none}
+ .logo{font-size:19px}
+ .links .btn{padding:9px 12px}
+ .hero{padding:60px 0}
+ .hero-grid{grid-template-columns:1fr;gap:35px}
+ h1{font-size:39px}
+ .hero p{font-size:15px}
+ .cards,.payment-list,.steps{grid-template-columns:1fr}
+ section{padding:55px 0}
+ .section-title h2{font-size:27px}
+ .footer-grid{grid-template-columns:1fr 1fr}
+ .footer-grid>div:first-child{grid-column:1/-1}
+}
+</style>
+</head>
+<body>
+
+<header>
+ <div class="container nav">
+  <a class="logo" href="#">BdEarn<span> Money</span></a>
+  <nav class="links">
+   <a class="hide" href="#features">Features</a>
+   <a class="hide" href="#payments">Payments</a>
+   <a class="hide" href="#how">How It Works</a>
+   <a class="btn" href="#contact">Get Started</a>
+  </nav>
+ </div>
+</header>
+
+<main>
+<section class="hero">
+ <div class="container hero-grid">
+  <div>
+   <span class="tag">PAYMENT COLLECTION PLATFORM</span>
+   <h1>Payments made <span>simple.</span></h1>
+   <p>Manage your payment collection with BdEarn Money. A convenient platform designed to help merchants organize and track their payment activities.</p>
+   <div class="hero-buttons">
+    <a class="btn" href="#contact">Get Started →</a>
+    <a class="btn btn-outline" href="#features">Explore Features</a>
+   </div>
+  </div>
+  <div class="visual">
+   <div class="visual-top"><span>PAYMENT OVERVIEW</span><span>BDT ৳</span></div>
+   <div class="amount">৳ 00.00</div>
+   <small>Sample dashboard preview</small>
+   <div class="visual-line"></div>
+   <div class="method"><span>bKash</span><b>Available</b></div>
+   <div class="method"><span>Nagad</span><b>Available</b></div>
+   <div class="method"><span>Rocket</span><b>Available</b></div>
+   <div class="visual-line"></div>
+   <span class="status">● Payment methods preview</span>
+  </div>
+ </div>
+</section>
+
+<section id="features">
+ <div class="container">
+  <div class="section-title">
+   <h2>Everything in One Place</h2>
+   <p>Simple tools to organize your payment activities.</p>
+  </div>
+  <div class="cards">
+   <div class="card"><div class="card-icon">↗</div><h3>Easy Collection</h3><p>Provide clear payment instructions to your customers.</p></div>
+   <div class="card"><div class="card-icon">▤</div><h3>Transaction Records</h3><p>Keep payment requests and transaction records organized.</p></div>
+   <div class="card"><div class="card-icon">⌘</div><h3>Merchant Dashboard</h3><p>Manage your account and monitor payment activity in one place.</p></div>
+   <div class="card"><div class="card-icon">✓</div><h3>Manual Verification</h3><p>Payment requests can be reviewed by an authorized administrator.</p></div>
+   <div class="card"><div class="card-icon">⚙</div><h3>Flexible Settings</h3><p>Manage payment instructions and account settings.</p></div>
+   <div class="card"><div class="card-icon">▣</div><h3>Mobile Friendly</h3><p>Access the platform from your smartphone or computer.</p></div>
+  </div>
+ </div>
+</section>
+
+<section class="methods" id="payments">
+ <div class="container">
+  <div class="section-title">
+   <h2>Supported Payment Methods</h2>
+   <p>Manual payment options planned for the platform.</p>
+  </div>
+  <div class="payment-list">
+   <div class="payment"><h3 class="bk">bKash</h3><p>Manual payment instructions</p></div>
+   <div class="payment"><h3 class="ng">Nagad</h3><p>Manual payment instructions</p></div>
+   <div class="payment"><h3 class="rk">Rocket</h3><p>Manual payment instructions</p></div>
+  </div>
+ </div>
+</section>
+
+<section id="how">
+ <div class="container">
+  <div class="section-title">
+   <h2>How It Works</h2>
+   <p>A simple manual payment request workflow.</p>
+  </div>
+  <div class="steps">
+   <div class="step"><div class="number">01</div><h3>Create Request</h3><p>Enter the payment details and select a payment method.</p></div>
+   <div class="step"><div class="number">02</div><h3>Submit Details</h3><p>Submit the transaction reference for administrator review.</p></div>
+   <div class="step"><div class="number">03</div><h3>Admin Review</h3><p>An authorized administrator checks the payment before approval.</p></div>
+  </div>
+ </div>
+</section>
+
+<section id="contact">
+ <div class="container">
+  <div class="cta">
+   <h2>Ready to get started?</h2>
+   <p>BdEarn Money is preparing a simple payment management experience for merchants.</p>
+   <a class="btn" href="mailto:support@bdearnmoney.com">Contact Us →</a>
+  </div>
+ </div>
+</section>
+</main>
+
+<footer>
+ <div class="container">
+  <div class="footer-grid">
+   <div><a class="logo" href="#">BdEarn<span> Money</span></a><p style="margin-top:13px">A payment collection and management platform concept.</p></div>
+   <div><h4>Quick Links</h4><a href="#features">Features</a><a href="#payments">Payment Methods</a><a href="#how">How It Works</a></div>
+   <div><h4>Information</h4><a href="#contact">Contact</a><a href="#features">About Platform</a></div>
+  </div>
+  <div class="copy">© 2026 BdEarn Money. All rights reserved.</div>
+ </div>
+</footer>
+</body>
+                                           </html>
